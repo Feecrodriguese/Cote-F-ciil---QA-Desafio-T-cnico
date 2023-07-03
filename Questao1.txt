@@ -1,0 +1,66 @@
+ra planetas:
+
+1. Caso de teste: Cadastro de planeta com sucesso
+
+- Execução manual:
+    Abrir a aplicação Java.
+    Acessar a funcionalidade de cadastro de planetas.
+    Preencher os campos obrigatórios:
+    Nome: Digitar o nome do planeta, por exemplo, "A".
+    Clima: Selecionar o clima do planeta a partir de uma lista de opções, por exemplo, escolher "2".
+    Terreno: Selecionar o terreno do planeta a partir de uma lista de opções, por exemplo, escolher "Y".
+    Clicar no botão "Cadastrar".
+    Verificar se uma mensagem de sucesso é exibida, confirmando que o planeta foi cadastrado corretamente.
+
+
+2.Caso de teste: Cadastro de planeta com campos vazios
+
+-Execução manual:
+    Abrir a aplicação Java.
+    Acessar a funcionalidade de cadastro de planetas.
+    Deixar os campos de Nome, Clima e Terreno em branco.
+    Clicar no botão "Cadastrar".
+    Verificar se uma mensagem de erro é exibida, indicando que todos os campos obrigatórios devem ser preenchidos.
+    
+3. Caso de teste: Cadastro de planeta com ID duplicado
+
+- Execução manual:
+    Abrir a aplicação Java.
+    Acessar a funcionalidade de cadastro de planetas.
+    Preencher os campos:
+    Nome: Digitar o nome do planeta, por exemplo, "B".
+    Clima: Selecionar o clima do planeta a partir de uma lista de opções, por exemplo, escolher "1".
+    Terreno: Selecionar o terreno do planeta a partir de uma lista de opções, por exemplo, escolher "X".
+    Preencher o campo de ID com um valor já existente na base de dados, por exemplo, "123".
+    Clicar no botão "Cadastrar".
+    Verificar se uma mensagem de erro é exibida, informando que o ID já está em uso e precisa ser único.
+    
+4. Caso de teste: Exclusão de planeta com sucesso
+
+
+-Execução manual:
+    Abrir a aplicação Java.
+    Acessar a funcionalidade de listagem de planetas cadastrados.
+    Localizar o planeta com o ID desejado, por exemplo, "124".
+    Clicar no botão "Remover" ao lado do planeta encontrado.
+    Confirmar a exclusão na mensagem de confirmação que aparecerá.
+    Verificar se uma mensagem de sucesso é exibida, confirmando que o planeta foi removido corretamente.
+    
+    
+5.Caso de teste: Consulta de planetas por nome
+
+-Execução manual:
+    Abrir a aplicação Java.
+    Acessar a funcionalidade de consulta de planetas.
+    Preencher o campo de busca com o nome do planeta desejado, por exemplo, "C".
+    Clicar no botão "Consultar".
+    Verificar se a lista de resultados exibida contém apenas os planetas com nomes iniciados pela letra "C".
+    
+6.Caso de teste: Consulta de planetas com nome inexistente
+
+-Execução manual:
+Abrir a aplicação Java.
+Acessar a funcionalidade de consulta de planetas.
+Preencher o campo de busca com um nome de planeta que não exista na base de dados, por exemplo, "E".
+Clicar no botão "Consultar".
+Verificar se uma mensagem informativa é exibida, informando que nenhum planeta foi encontrado com o nome especificado.

@@ -1,0 +1,65 @@
+Com base de busca no modelo de banco de dados relacional SQL
+
+a) Elabore uma consulta que retorne os códigos de barras dos produtos cadastrados pela primeira vez no
+banco nos últimos 10 dias. 
+
+Resolução
+
+SELECT Produto.Código_de_barras
+FROM Produto
+JOIN Produtoinfo ON Produto.ID = Produtoinfo.IDProduto
+WHERE Produto.Data_cadastro >= DATE_SUB(CURDATE(), INTERVAL 10 DAY)
+AND NOT EXISTS (
+  SELECT 1
+  FROM Produto
+  JOIN Produtoinfo ON Produto.ID = Produtoinfo.IDProduto
+  WHERE Produto.Data_cadastro < DATE_SUB(CURDATE(), INTERVAL 10 DAY)
+)
+
+------------------------------------------------------------------------------------------------------------
+
+b) Elabore uma consulta que retorne os nomes das origens que tiveram algum produto cadastrado ou
+atualizado no mês de março de 2020. 
+
+SELECT Origem.Nome
+FROM Origem
+JOIN Produtoinfo ON Origem.ID = Produtoinfo.IDOrigem
+JOIN Produto ON Produtoinfo.IDProduto = Produto.ID
+WHERE (MONTH(Produto.Data_cadastro) = 3 AND YEAR(Produto.Data_cadastro) = 2020)
+   OR (MONTH(Produtoinfo.Data_atualização) = 3 AND YEAR(Produtoinfo.Data_atualização) = 2020)
+
+------------------------------------------------------------------------------------------------------------
+
+c) Houve um erro na atualização da origem “DISTRIBUIDORA TESTE” em que todos os produtos do
+fabricante “JOAO” foram enviados com nome “MARIA”. Faça um update que troque os produtos da
+“DISTRIBUIDORA TESTE” com fabricante “MARIA” para o fabricante “JOAO”.
+
+UPDATE Produto
+SET Fabricante = 'JOAO'
+WHERE Origem = 'DISTRIBUIDORA TESTE' AND Fabricante = 'MARIA';
+
+------------------------------------------------------------------------------------------------------------
+
+d) Elabore uma consulta que retorne os códigos de barras, descrição, nome do fabricante e código interno
+de todos os produtos cadastrados de acordo com a ordem de preferência, onde um código de barras
+aparecerá apenas uma vez no resultado com as informações da origem de maior preferência disponível
+para ele. 
+
+SELECT p.Código_de_barras, pi.Descrição, f.Nome AS Nome_Fabricante, pi.Código_Interno
+FROM Produto p
+JOIN Produtoinfo pi ON p.ID = pi.IDProduto
+JOIN Origem o ON pi.IDOrigem = o.ID
+JOIN (
+    SELECT Código_de_barras, MAX(Preferencia) AS Maior_Preferencia
+    FROM Origem
+    GROUP BY Código_de_barras
+) sub ON o.Código_de_barras = sub.Código_de_barras AND o.Preferencia = sub.Maior_Preferencia
+JOIN Fabricante f ON o.IDFabricante = f.ID
+GROUP BY p.Código_de_barras
+
+
+
+
+
+
+
